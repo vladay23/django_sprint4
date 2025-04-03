@@ -8,27 +8,35 @@ SECRET_KEY = 'django-insecure-xn5)z4fdefk$^j!_&-!xukk-d@@eprv!nes2l_wp5f2=6_!l(a
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
     'localhost',
+    '127.0.0.1',
 ]
 
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 
+EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
+LOGIN_REDIRECT_URL = 'blog:index'
+
+LOGIN_URL = 'login'
+
+CSRF_FAILURE_VIEW = 'pages.views.csrf_failure'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
 INSTALLED_APPS = [
-    'blog.apps.BlogConfig',
-    'pages.apps.PagesConfig',
-    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
+    'blog.apps.BlogConfig',
+    'pages.apps.PagesConfig',
     'django_bootstrap5',
 ]
 
@@ -40,7 +48,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'blogicum.urls'
@@ -65,15 +72,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'blogicum.wsgi.application'
 
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -90,10 +94,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'Europe/Moscow'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -101,24 +104,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-
 STATIC_URL = '/static/'
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-CSRF_FAILURE_VIEW = 'pages.views.csrf_failure'
-
-AUTH_USER_MODEL = 'users.User'
-
-LOGIN_REDIRECT_URL = 'blog:index'
-
-LOGIN_URL = 'users:login'
-
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = BASE_DIR / 'sent_emails/'
-
-MEDIA_ROOT = BASE_DIR / 'media/'
-
-MEDIA_URL = '/media/'
